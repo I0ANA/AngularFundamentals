@@ -2,7 +2,9 @@ import { Component } from '@angular/core';
 
 @Component({
   selector: 'events-app',
-  template: `
+  template: '<events-list></events-list>'
+  
+  /*`
   <h1>Hello from events-app.component.ts </h1>
   <img src="/assets/images/basic-shield.png"/> 
   <!-- this path is relative to the index.html file-->
@@ -15,6 +17,7 @@ import { Component } from '@angular/core';
   
   -->
   `
+   */
 })
 export class EventsAppComponent {
   title = 'ng-fundamentals';
