@@ -7,6 +7,7 @@ import { Component } from '@angular/core'
         <h1>Upcoming Angular Events</h1>
         <hr/>
         <event-thumbnail 
+            #templateVariable
             (eventClick)="handleClickInChild($event)" 
             [event]="event1" ></event-thumbnail>
             <!-- This (eventClick) binds to the @Output property in the child component <event-thumbnail>;
@@ -15,6 +16,9 @@ import { Component } from '@angular/core'
             !! $event -> this is the data emited from the event-thumbnail component, you can only pass in one data set so 
             if you have multiple values you must wrap/bundle them in one object
             -->
+        <button type="button" class="btn btn-danger" (click)="templateVariable.logFoo()">Click to log Foo</button>
+        <!-- Define and use #templateVariable template variable to access public methods and properties in child component -->
+        <div> {{templateVariable.testStringProperty}}</div>
         </div>
     `
 })

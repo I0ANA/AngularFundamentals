@@ -17,6 +17,7 @@ import {Component, Input, Output, EventEmitter } from '@angular/core'
 })
 
 export class EventThumbnailComponent{
+    testStringProperty:string = 'Hello there!'
 
     @Input() event: any
     //this output property is what the parent componet binds to, not the handleClickMe() method below!! 
@@ -26,5 +27,9 @@ export class EventThumbnailComponent{
     handleClickMe() {
         console.log('in child component, sending component name')
         this.eventClick.emit(this.event.name)
+    }
+
+    logFoo(){
+        console.log('log foo from child; method called using template variable #templateVariable')
     }
 }
