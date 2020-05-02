@@ -11,6 +11,9 @@ import { Component } from '@angular/core'
             [event]="event1" ></event-thumbnail>
             <!-- This (eventClick) binds to the @Output property in the child component <event-thumbnail>;
             the @Output eventClick property is an event so we bind with () not with []
+
+            !! $event -> this is the data emited from the event-thumbnail component, you can only pass in one data set so 
+            if you have multiple values you must wrap/bundle them in one object
             -->
         </div>
     `

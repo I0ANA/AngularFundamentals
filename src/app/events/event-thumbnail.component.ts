@@ -24,7 +24,7 @@ export class EventThumbnailComponent{
     
     //emitting the event when the button is clcicked in the child component 
     handleClickMe() {
-        console.log('in child component, sending \'foo\'')
-        this.eventClick.emit('foo')
+        console.log('in child component, sending component name')
+        this.eventClick.emit(this.event.name)
     }
 }
