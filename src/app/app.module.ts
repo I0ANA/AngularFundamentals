@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser'
 import { NgModule } from '@angular/core'
+import { RouterModule } from '@angular/router'
 
 import { EventsAppComponent } from './events-app.component'
 import { EventsListComponent } from './events/events-list.component'
@@ -9,9 +10,12 @@ import { EventService } from './events/shared/event.service'
 import { ToastrService } from './common/toastr.service'
 import { EventDetailsComponent } from './events/event-details/event-detail.component'
 
+import { appRoutes } from './routes'
+
 @NgModule({
   imports: [
-    BrowserModule
+    BrowserModule,
+    RouterModule.forRoot(appRoutes)
   ],
   declarations: [
     EventsAppComponent,
@@ -21,7 +25,10 @@ import { EventDetailsComponent } from './events/event-details/event-detail.compo
     EventDetailsComponent
   ],
   //register service with angular so Angular will provide an instance of the object where the service is injected
-  providers: [EventService, ToastrService],
+  providers: [
+    EventService, 
+    ToastrService
+  ],
   bootstrap: [EventsAppComponent]
 })
 export class AppModule { }

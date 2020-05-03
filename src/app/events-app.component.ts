@@ -1,10 +1,14 @@
 import { Component } from '@angular/core';
 
 @Component({
+  // adding routes and the <router-outlet> component in the events-app means we can navigate directly to the events-app so the selector is no longer needed
   selector: 'events-app',
   template: `
-  <nav-bar></nav-bar>
-  <events-list></events-list>
+    <nav-bar></nav-bar>
+    
+    <!-- by using <router-outlet> component directive we tell angular to match witchever route mathces our url, 
+    not redirect to a specific <component-selector> -->
+    <router-outlet></router-outlet>
   `
   
   /*`

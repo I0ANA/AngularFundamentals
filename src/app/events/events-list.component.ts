@@ -3,7 +3,8 @@ import { EventService } from './shared/event.service'
 import { ToastrService } from '../common/toastr.service'
 
 @Component({
-    selector:'events-list',
+    // adding routes and the <router-outlet> component in the events-app means we can navigate directly to the events-app so the selector is no longer needed
+    // selector:'events-list',
     template: `
     <div>
         <h1>Upcoming Angular Events</h1>
