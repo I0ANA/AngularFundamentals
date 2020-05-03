@@ -38,5 +38,7 @@ export class EventThumbnailComponent{
 
     logFoo(){
         console.log('log foo from child; method called using template variable #templateVariable')
+        console.log('in child component, sending \'foo\'')
+        this.eventClick.emit('foo')
     }
 }
