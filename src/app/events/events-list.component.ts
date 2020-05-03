@@ -259,11 +259,11 @@ export class EventsListComponent {
           time: '8:00 am',
           price: 800.00,
           imageUrl: '/assets/images/basic-shield.png',
-          location: {
-            address: 'The UN Angular Center',
-            city: 'New York',
-            country: 'USA'
-          },
+          // location: {
+          //   address: 'The UN Angular Center',
+          //   city: 'New York',
+          //   country: 'USA'
+          // },
           sessions: [
             {
               id: 1,
