@@ -1,4 +1,4 @@
-import { Component } from '@angular/core'
+import { Component, OnInit } from '@angular/core'
 import { EventService } from './shared/event.service'
 
 @Component({
@@ -30,15 +30,24 @@ import { EventService } from './shared/event.service'
     </div>
     `
 })
-export class EventsListComponent {
+export class EventsListComponent 
+//take advantage of Typescript and let angular know this Component is implementing ngOnInit by adding it, not mandatory
+//this offers type compilation safety
+implements OnInit {
+  
     testInput:string = ''
     events:any[]
 
     constructor(private eventService:EventService) {
-      this.events = this.eventService.getService()
     }
 
     handleClickInChild(data) {
         console.log('in parent event received: ' + data)
+    }
+
+    //Components have lifecycle hooks eg ngOnInit()
+    //it is not a good idea to add long running calls in the constructor 
+    ngOnInit(){
+      this.events = this.eventService.getService()
     }
 }
