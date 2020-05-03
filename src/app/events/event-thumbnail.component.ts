@@ -8,8 +8,9 @@ import {Component, Input, Output, EventEmitter } from '@angular/core'
         <div> Date: {{event.date}}</div>
         <div> Time: {{event.time}}</div>
         <div> Price: \${{event.price}}</div>
-        <div *ngIf="event?.location">  
-            <span>Location: {{event.location.address}}</span>
+        <div [hidden]="!event?.location">  
+            <span>Location: {{event?.location?.address}}</span>
+            <!-- Not using the safe navigation operator ? will raise an error and all the following events will not be loaded properly-->
         </div>
         <button class="btn btn-primary" (click)="handleClickMe()">Click Me!</button>
     </div>
