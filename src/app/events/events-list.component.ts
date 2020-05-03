@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core'
 import { EventService } from './shared/event.service'
+import { ToastrService } from '../common/toastr.service'
 
 @Component({
     selector:'events-list',
@@ -9,7 +10,7 @@ import { EventService } from './shared/event.service'
         <hr/>
         <div class="row">
             <div *ngFor="let thisEvent of events" class="col-md-5">
-                <event-thumbnail 
+                <event-thumbnail (click)="handleThumbnailClick(thisEvent.name)"
                     #templateVariable
                     (eventClick)="handleClickInChild($event)" 
                     [event]="thisEvent" >
@@ -38,7 +39,7 @@ implements OnInit {
     testInput:string = ''
     events:any[]
 
-    constructor(private eventService:EventService) {
+    constructor(private eventService:EventService, private toastr:ToastrService) {
     }
 
     handleClickInChild(data) {
@@ -49,5 +50,9 @@ implements OnInit {
     //it is not a good idea to add long running calls in the constructor 
     ngOnInit(){
       this.events = this.eventService.getService()
+    }
+
+    handleThumbnailClick(eventName){
+      this.toastr.success(eventName, 'test title')
     }
 }
