@@ -7,7 +7,7 @@ import {Component, Input, Output, EventEmitter } from '@angular/core'
         <h2>{{event.name}}</h2>
         <div> Date: {{event.date}}</div>
         <div 
-            [ngClass]="{green: event?.time === '8:00 am', bold: event?.time === '8:00 am' }" 
+            [ngClass]="getStartTimeClassAsString()" 
             [ngSwitch]="event?.time"> Time: {{event.time}}
             <span *ngSwitchCase="'8:00 am'">(Early Start)</span>
             <span *ngSwitchCase="'10:00 am'">(Late Start)</span>
@@ -49,5 +49,23 @@ export class EventThumbnailComponent{
         console.log('log foo from child; method called using template variable #templateVariable')
         console.log('in child component, sending \'foo\'')
         this.eventClick.emit('foo')
+    }
+
+    getStartTimeClass(){
+        //return the object or return a string with the classes as the getStartTimeClassAsString() or an array as getStartTimeClassAsArray()
+        const isEarlyStart = this.event && this.event.time === '8:00 am'
+        return { green: isEarlyStart, bold: isEarlyStart }
+    }
+
+    getStartTimeClassAsString(){
+        if( this.event && this.event.time === '8:00 am')
+        return 'green bold'
+        else ''
+    }
+
+    getStartTimeClassAsArray(){
+        if( this.event && this.event.time === '8:00 am')
+        return ['green', 'bold']
+        else []
     }
 }
