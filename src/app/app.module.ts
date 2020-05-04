@@ -11,6 +11,7 @@ import { ToastrService } from './common/toastr.service'
 import { EventDetailsComponent } from './events/event-details/event-detail.component'
 
 import { appRoutes } from './routes'
+import { CreateEventComponent } from './events/create-event.component'
 
 @NgModule({
   imports: [
@@ -22,7 +23,8 @@ import { appRoutes } from './routes'
     EventsListComponent,
     EventThumbnailComponent,
     NavBarComponent,
-    EventDetailsComponent
+    EventDetailsComponent,
+    CreateEventComponent
   ],
   //register service with angular so Angular will provide an instance of the object where the service is injected
   providers: [
