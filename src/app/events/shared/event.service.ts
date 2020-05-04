@@ -1,9 +1,14 @@
 import { Injectable } from '@angular/core'
+import { Subject } from 'rxjs'
 
 @Injectable() //this Injectable is required just when the constructorof the service has another service injected, but it is good practice to include it
 export class EventService {
-    getService() {
-        return EVENTS
+    getEvents() {
+        let subject = new Subject()
+        //load async - 100ms the data to simulate a request
+        setTimeout( () => { subject.next(EVENTS); subject.complete(); }, 100 )
+
+        return subject
     }
 
     getEvent(id:number){

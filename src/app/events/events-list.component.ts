@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core'
 import { EventService } from './shared/event.service'
 import { ToastrService } from '../common/toastr.service'
+import { ActivatedRoute } from '@angular/router'
 
 @Component({
     // adding routes and the <router-outlet> component in the events-app means we can navigate directly to the events-app so the selector is no longer needed
@@ -38,9 +39,9 @@ export class EventsListComponent
 implements OnInit {
   
     testInput:string = ''
-    events:any[]
+    events:any
 
-    constructor(private eventService:EventService, private toastr:ToastrService) {
+    constructor(private eventService:EventService, private toastr:ToastrService, private route:ActivatedRoute) {
     }
 
     handleClickInChild(data) {
@@ -50,7 +51,11 @@ implements OnInit {
     //Components have lifecycle hooks eg ngOnInit()
     //it is not a good idea to add long running calls in the constructor 
     ngOnInit(){
-      this.events = this.eventService.getService()
+        //no longer needed becasue we are preloading the data in a resolver, which returns the events, 
+        //and the angular route resolve parameter takest the events and appends them to the route, so we need the activated route
+        //this.eventService.getEvents().subscribe( events => { this.events = events } )
+
+        this.events = this.route.snapshot.data['events']
     }
 
     handleThumbnailClick(eventName){

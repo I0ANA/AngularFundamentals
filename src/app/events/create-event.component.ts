@@ -12,7 +12,7 @@ import { Router } from '@angular/router';
 
             <!-- Navigate from HTML -->
             <button type="button" class="btn btn-default" [routerLink]="['/events']">Cancel (Navigate from HTML)</button>
-            
+
             <!-- Navigate from code --> 
             <button type="button" class="btn btn-default ml-2" (click)="cancel()">Cancel (Navigate from code)</button>
 
@@ -21,7 +21,7 @@ import { Router } from '@angular/router';
 })
 export class CreateEventComponent
 {
-
+    isDirty: boolean = true
     constructor (private router: Router){
         
     }
