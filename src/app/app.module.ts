@@ -34,8 +34,20 @@ import { EventRouteActivator } from './events/event-details/event-route-activato
   providers: [
     EventService, 
     ToastrService,
-    EventRouteActivator 
+    EventRouteActivator, //EventRouteActivator this is the short hand form for declaring a provider
+    //register afunction as a provider in a module, usign the long hand syntax for deplaring a provider
+    //when <requested> use <service>
+    {
+      provide: 'canDeactivateCreateEvent',
+      useValue: checkDirtyState
+    }
   ],
   bootstrap: [EventsAppComponent]
 })
 export class AppModule { }
+
+
+export function checkDirtyState() {
+
+  return false 
+}

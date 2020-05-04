@@ -10,9 +10,12 @@ import { EventRouteActivator } from './events/event-details/event-route-activato
 export const appRoutes:Routes = [
     //the order of the routes matter: the /new path and the /:id path can't be distinguished by angular 
     //so having /new after /:id will make angular believe we are trying to pass 'new' as id parameter
-    {path: 'events/new', component: CreateEventComponent },
+    //create a canDeactivate guard using a function, not a service
+    {path: 'events/new', component: CreateEventComponent, canDeactivate: ['canDeactivateCreateEvent'] },
     {path: 'events', component: EventsListComponent },
+
     {path: 'events/:id', component: EventDetailsComponent, canActivate: [EventRouteActivator] },
+
     //{path: 'events/new', component: CreateEventComponent },
     {path: '404', component: Error404Component },
     {path: '', redirectTo: '/events', pathMatch: 'full' } 
