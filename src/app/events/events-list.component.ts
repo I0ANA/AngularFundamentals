@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core'
 import { EventService } from './shared/event.service'
 import { ToastrService } from '../common/toastr.service'
 import { ActivatedRoute } from '@angular/router'
+import { IEvent } from './shared/event.model'
 
 @Component({
     // adding routes and the <router-outlet> component in the events-app means we can navigate directly to the events-app so the selector is no longer needed
@@ -39,7 +40,7 @@ export class EventsListComponent
 implements OnInit {
   
     testInput:string = ''
-    events:any
+    events:IEvent[]
 
     constructor(private eventService:EventService, private toastr:ToastrService, private route:ActivatedRoute) {
     }

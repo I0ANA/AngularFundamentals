@@ -1,4 +1,5 @@
 import {Component, Input, Output, EventEmitter } from '@angular/core'
+import { IEvent } from './shared/event.model'
 
 @Component({
     selector:'event-thumbnail',
@@ -35,7 +36,7 @@ import {Component, Input, Output, EventEmitter } from '@angular/core'
 export class EventThumbnailComponent{
     testStringProperty:string = 'Hello'
 
-    @Input() event: any
+    @Input() event: IEvent
     //this output property is what the parent componet binds to, not the handleClickMe() method below!! 
     @Output() eventClick = new EventEmitter()
     
