@@ -19,7 +19,12 @@ export const appRoutes:Routes = [
 
     //{path: 'events/new', component: CreateEventComponent },
     {path: '404', component: Error404Component },
-    {path: '', redirectTo: '/events', pathMatch: 'full' } 
+    {path: '', redirectTo: '/events', pathMatch: 'full' },
+
+    //this is how we add a path for a feature module
+    //lazy module load children paths 
+    //loadChildren: '<path to the file>#<name of the module>
+    {path: 'user', loadChildren: './user/user.module#userModule'}
     //pathMatch options:
     //prefix --> redirect if the URL starts with the specified path string 
     //full --> redirect if the URl FULLY matches the specified path string 
