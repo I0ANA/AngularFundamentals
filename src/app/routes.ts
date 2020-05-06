@@ -1,12 +1,13 @@
 //Routes is not mandatory but it takes advantage ot the Typescript strongly types feature
 import { Routes } from '@angular/router'
-
-import { EventsListComponent} from './events/events-list.component'
-import { EventDetailsComponent } from './events/event-details/event-detail.component'
-import { CreateEventComponent } from './events/create-event.component'
 import { Error404Component } from './errors/404.component'
-import { EventRouteActivator } from './events/event-details/event-route-activator.service'
-import { EventListResolver } from './events/event-list-resolver.service'
+
+import { 
+    EventsListComponent,
+    EventDetailsComponent, 
+    CreateEventComponent, 
+    EventRouteActivator, 
+    EventListResolver } from './events/index'
 
 export const appRoutes:Routes = [
     //the order of the routes matter: the /new path and the /:id path can't be distinguished by angular 
