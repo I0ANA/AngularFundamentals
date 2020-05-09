@@ -7,14 +7,15 @@ import { LoginComponent } from './login.component'
 
 // FormsModule gives us access to template based forms features
 //we need to import it to have access to (ngModel)
-import { FormsModule} from '@angular/forms' 
+import {FormsModule, ReactiveFormsModule} from '@angular/forms'
 
 @NgModule({
 imports:[
     CommonModule, //this is what makes the difference between a feature module/ lazy loading feature module and the appModule which loads the BrowserModule
     //another difference is that in the appModule we call RouterModule.forRoot while in our feature module we call RouterModule.forChild()
     RouterModule.forChild(userRoutes),
-    FormsModule
+    FormsModule, 
+    ReactiveFormsModule
 ],
 declarations: [
     ProfileComponent,
@@ -24,6 +25,6 @@ providers: [
 
 ]
 })
-export class userModule {
+export class UserModule {
 
 }
