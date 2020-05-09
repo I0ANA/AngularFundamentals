@@ -25,7 +25,7 @@ export const appRoutes:Routes = [
     //this is how we add a path for a feature module
     //lazy module load children paths 
     //loadChildren: '<path to the file>#<name of the module>
-    {path: 'user', loadChildren: './user/user.module#userModule'}
+    {path: 'user', loadChildren: './user/user.module#UserModule'}
     //pathMatch options:
     //prefix --> redirect if the URL starts with the specified path string 
     //full --> redirect if the URl FULLY matches the specified path string 

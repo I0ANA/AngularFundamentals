@@ -25,6 +25,6 @@ providers: [
 
 ]
 })
-export class UserModule {
+export class UserModule { 
 
 }
