@@ -2,31 +2,24 @@ import { Component } from '@angular/core'
 import { Router } from '@angular/router';
 
 @Component({ 
-    template:`
-        <h1>New Event</h1>
-        <hr>
-        <div>
-            <h3> ...crete event -- this will be a form </h3>
-            <br />
-            <button type="submit" class="btn btn-primary">Save</button>
-
-            <!-- Navigate from HTML -->
-            <button type="button" class="btn btn-default" [routerLink]="['/events']">Cancel (Navigate from HTML)</button>
-
-            <!-- Navigate from code --> 
-            <button type="button" class="btn btn-default ml-2" (click)="cancel()">Cancel (Navigate from code)</button>
-
-        </div>
-    `
+    templateUrl: './create-event.component.html',
+    styles: [`
+        em { float: right; color: #E05C65; padding-left: 10px; }
+        .error input { background-color: #E3C3C5}
+        .error ::-webkit-input-placeholder { color: #999 }
+    `]
 })
 export class CreateEventComponent
 {
+    newEvent
     isDirty: boolean = true
-    constructor (private router: Router){
-        
-    }
-
+    constructor (private router: Router){} 
+    
     cancel(){
         this.router.navigate(['/events'])
+    }
+
+    saveEvent(formValues){
+        console.log(formValues)
     }
 } 

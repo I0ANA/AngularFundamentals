@@ -7,7 +7,7 @@ import { LoginComponent } from './login.component'
 
 // FormsModule gives us access to template based forms features
 //we need to import it to have access to (ngModel)
-import {FormsModule, ReactiveFormsModule} from '@angular/forms'
+import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 
 @NgModule({
 imports:[
