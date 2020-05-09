@@ -21,7 +21,10 @@ export class ProfileComponent implements OnInit {
   lastName: FormControl
 
   ngOnInit(): void {
-    this.firstName = new FormControl(this.auth.currentUser.firstName, Validators.required)
+    console.log('this.auth.currentUser.firstName: ' + this.auth.currentUser.firstName)
+    console.log('this.auth.currentUser.lastName: ' + this.auth.currentUser.lastName)
+//this does not work properly - the erros does not dissapear when addin a valid firstname
+    this.firstName = new FormControl(this.auth.currentUser.firstName, [Validators.required, Validators.pattern("a-zA-Z.*")])
     this.lastName = new FormControl(this.auth.currentUser.lastName, Validators.required)
 
     this.profileForm = new FormGroup({
