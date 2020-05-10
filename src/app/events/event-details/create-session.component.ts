@@ -38,6 +38,8 @@ export class CreateSessionComponent implements OnInit {
 
     private restrictedWords(control: FormControl): {[key:string]: any}
     {
+        // <em *ngIf="abstract.invalid && abstract.dirty && abstract?.errors.restrictedWords">restrictedWords found</em>
+        // when applied in html, the restrictedWords in abstract?.errors.restrictedWords matches the restrictedWords in ? {'restrictedWords': 'foo'}
         return control.value.includes('foo')
         ? {'restrictedWords': 'foo'}
         : null 
