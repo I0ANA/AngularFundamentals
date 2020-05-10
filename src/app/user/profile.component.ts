@@ -17,8 +17,10 @@ export class ProfileComponent implements OnInit {
   constructor(private auth:AuthService, private router:Router){}
 
   profileForm: FormGroup
-  firstName: FormControl
-  lastName: FormControl
+  //becasue these properties are private we needed to acces the field on the form using the syntax: profileForm.controls.<fieldname>.<property>
+  //otherwise, if the fields are public, we can access them directly 
+  private firstName: FormControl
+  private lastName: FormControl
 
   ngOnInit(): void {
     //erroring

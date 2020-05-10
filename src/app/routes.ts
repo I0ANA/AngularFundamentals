@@ -7,14 +7,18 @@ import {
     EventDetailsComponent, 
     CreateEventComponent, 
     EventRouteActivator, 
-    EventListResolver } from './events/index'
+    EventListResolver,
+    CreateSessionComponent
+ } from './events/index'
 
 export const appRoutes:Routes = [
     //the order of the routes matter: the /new path and the /:id path can't be distinguished by angular 
     //so having /new after /:id will make angular believe we are trying to pass 'new' as id parameter
     //create a canDeactivate guard using a function, not a service
     {path: 'events/new', component: CreateEventComponent, canDeactivate: ['canDeactivateCreateEvent'] },
-    {path: 'events', component: EventsListComponent, resolve: { events: EventListResolver}},
+    {path: 'events', component: EventsListComponent, resolve: { events: EventListResolver} },
+
+    {path: 'events/session/new', component: CreateSessionComponent},
 
     {path: 'events/:id', component: EventDetailsComponent, canActivate: [EventRouteActivator] },
 

@@ -12,10 +12,26 @@ import { EventService } from './shared/event.service';
 })
 export class CreateEventComponent
 {
-    newEvent
+    // newEvent
     isDirty: boolean = true
     constructor (private router: Router, private eventService:EventService){} 
-    
+
+    ngOnInit(){
+        // this.newEvent = {
+        //     name: 'Ng Spectacular',
+        //     date: '8/8/2028',
+        //     time: '10am',
+        //     price: 799.00,
+        //     location: {
+        //         address: '456 Happy Way',
+        //         city: 'Felicity',
+        //         country: 'Angularistan'
+        //     },
+        //     onlineUrl: 'http:test.test',
+        //     imageUrl: 'http://.png'
+        // }
+    }
+
     cancel(){
         this.router.navigate(['/events'])
     }
