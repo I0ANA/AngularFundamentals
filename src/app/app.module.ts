@@ -10,8 +10,8 @@ import { EventsListComponent,
   EventDetailsComponent, 
   EventRouteActivator, 
   EventService, 
-  CreateSessionComponent} 
-  from './events/index'
+  CreateSessionComponent,
+  SessionListComponent} from './events/index'
 import { NavBarComponent } from './nav/navbar.component'
 import { ToastrService } from './common/toastr.service'
 import { Error404Component } from './errors/404.component'
@@ -34,7 +34,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms'
     EventDetailsComponent,
     CreateEventComponent,
     Error404Component,
-    CreateSessionComponent    
+    CreateSessionComponent,
+    SessionListComponent   
   ],
   //register service with angular so Angular will provide an instance of the object where the service is injected
   providers: [
