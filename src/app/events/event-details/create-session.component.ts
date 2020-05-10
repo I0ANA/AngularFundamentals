@@ -3,28 +3,32 @@ import { FormControl, FormGroup, Validators } from '@angular/forms'
 import { ISession } from '../shared/event.model'
 
 @Component({
-    templateUrl: './create-session.component.html'
-
+    templateUrl: './create-session.component.html',
+    styles: [`
+        em { float: right; color: #E05C65; padding-left: 10px; }
+        .error input { background-color: #E3C3C5}
+        .error ::-webkit-input-placeholder { color: #999 }
+    `]
 })
 
 export class CreateSessionComponent implements OnInit {
 
     newSessionGroup: FormGroup
-    name: FormControl
+    sessionName: FormControl
     presenter: FormControl
     duration: FormControl
     level: FormControl
     abstract: FormControl
 
     ngOnInit() {
-        this.name = new FormControl('', Validators.required)
+        this.sessionName = new FormControl('', Validators.required)
         this.presenter = new FormControl('', Validators.required)
         this.duration = new FormControl('', Validators.required)
         this.level = new FormControl('', Validators.required)
-        this.abstract = new FormControl('', [Validators.required, Validators.maxLength(400)])
+        this.abstract = new FormControl('', [Validators.required, Validators.maxLength(400), this.restrictedWords])
 
         this.newSessionGroup = new FormGroup({
-            name: this.name,
+            sessionName: this.sessionName,
             presenter: this.presenter,
             duration: this.duration,
             level: this.level,
@@ -32,10 +36,17 @@ export class CreateSessionComponent implements OnInit {
         })
     }
 
+    private restrictedWords(control: FormControl): {[key:string]: any}
+    {
+        return control.value.includes('foo')
+        ? {'restrictedWords': 'foo'}
+        : null 
+    }
+
     saveSession(formValues){
         let session:ISession =  {
             id: undefined,
-            name: formValues.name,
+            name: formValues.sessionName,
             presenter: formValues.presenter,
             duration: +formValues.duration,
             level: formValues.level,
