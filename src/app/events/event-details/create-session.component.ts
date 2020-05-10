@@ -25,7 +25,7 @@ export class CreateSessionComponent implements OnInit {
         this.presenter = new FormControl('', Validators.required)
         this.duration = new FormControl('', Validators.required)
         this.level = new FormControl('', Validators.required)
-        this.abstract = new FormControl('', [Validators.required, Validators.maxLength(400), this.restrictedWords])
+        this.abstract = new FormControl('', [Validators.required, Validators.maxLength(400), this.restrictedWords(['foo', 'bar']) ])
 
         this.newSessionGroup = new FormGroup({
             sessionName: this.sessionName,
@@ -36,13 +36,26 @@ export class CreateSessionComponent implements OnInit {
         })
     }
 
-    private restrictedWords(control: FormControl): {[key:string]: any}
-    {
-        // <em *ngIf="abstract.invalid && abstract.dirty && abstract?.errors.restrictedWords">restrictedWords found</em>
-        // when applied in html, the restrictedWords in abstract?.errors.restrictedWords matches the restrictedWords in ? {'restrictedWords': 'foo'}
-        return control.value.includes('foo')
-        ? {'restrictedWords': 'foo'}
-        : null 
+    // private restrictedWords(control: FormControl): {[key:string]: any}
+    // {
+    //     // <em *ngIf="abstract.invalid && abstract.dirty && abstract?.errors.restrictedWords">restrictedWords found</em>
+    //     // when applied in html, the restrictedWords in abstract?.errors.restrictedWords matches the restrictedWords in ? {'restrictedWords': 'foo'}
+    //     return control.value.includes('foo')
+    //     ? {'restrictedWords': 'foo'}
+    //     : null 
+    // }
+    
+    private restrictedWords(words:string[]) {
+        //restrictedWords is a function that returns an annomymous function: (in params):<returned type> { ... return <return type>}
+        return (control: FormControl): {[key:string]: any} => {
+            if (!words) return null
+
+            var invalidWords = words.map( w => control.value.includes(w) ? w : null ).filter(w => w != null )
+
+            return invalidWords && invalidWords.length > 0 
+                ? {'restrictedWords': invalidWords.join(', ')}
+                : null
+        }
     }
 
     saveSession(formValues){
