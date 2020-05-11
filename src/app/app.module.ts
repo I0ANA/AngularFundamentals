@@ -11,7 +11,8 @@ import { EventsListComponent,
   EventRouteActivator, 
   EventService, 
   CreateSessionComponent,
-  SessionListComponent} from './events/index'
+  SessionListComponent,
+  DurationPipe} from './events/index'
 import { NavBarComponent } from './nav/navbar.component'
 import { ToastrService } from './common/toastr.service'
 import { CollapsibleWellComponent } from './common/collapsible-well.component'
@@ -41,7 +42,8 @@ import { CollapsibleWellWithThreeSlots } from './common/collapsible-well-three-s
     SessionListComponent,
     CollapsibleWellComponent,
     CollapsibleWellWithSlots,
-    CollapsibleWellWithThreeSlots
+    CollapsibleWellWithThreeSlots,
+    DurationPipe
   ],
   //register service with angular so Angular will provide an instance of the object where the service is injected
   providers: [
