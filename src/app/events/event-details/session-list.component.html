@@ -9,8 +9,8 @@
     </collapsible-well>
   </div> -->
 
-  <div class="col-md-10">
-    <collapsible-well-with-slots [title]="session.name">
+  <!-- <div class="col-md-10">
+    <collapsible-well-with-slots>
       <div well-title-h4>
         {{session.name}}
         <i *ngIf="session.voters.length > 3 " class="glyphicon glyphicon-fire"></i>
@@ -23,5 +23,23 @@
         <p>{{session.abstract}}</p>
       </div>
     </collapsible-well-with-slots>
+  </div> -->
+
+  <div class="col-md-10">
+    <collapsible-well-with-three-slots>
+      <div well-title-h4>
+        {{session.name}}
+        <i *ngIf="session.voters.length > 3 " class="glyphicon glyphicon-fire"></i>
+      </div>
+      <div well-subtitle> 
+        Presenter: {{session.presenter}}
+      </div>
+      <div well-body>
+        <span>Duration: {{session.duration}}</span><br />
+        <span>Level: {{session.level}}</span>
+        
+        <p>{{session.abstract}}</p>
+      </div>
+    </collapsible-well-with-three-slots>
   </div>
 </div>
