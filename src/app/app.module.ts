@@ -19,6 +19,7 @@ import { Error404Component } from './errors/404.component'
 import { appRoutes } from './routes'
 import { AuthService } from './user/auth.service'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
+import { CollapsibleWellWitSlots as CollapsibleWellWithSlots } from './common/collapsible-well-with-slots.component'
 
 @NgModule({
   imports: [
@@ -37,7 +38,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms'
     Error404Component,
     CreateSessionComponent,
     SessionListComponent,
-    CollapsibleWellComponent
+    CollapsibleWellComponent,
+    CollapsibleWellWithSlots
   ],
   //register service with angular so Angular will provide an instance of the object where the service is injected
   providers: [
