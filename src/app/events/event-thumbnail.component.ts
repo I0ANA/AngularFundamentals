@@ -6,7 +6,7 @@ import { IEvent } from './shared/event.model'
     template: `
     <div [routerLink]="['/events', event.id]" class="well hoverwell thumbnail">
         <h2>{{event.name}}</h2>
-        <div> Date: {{event.date}}</div>
+        <div> Date: {{event.date | date }}</div>
         <div 
             [ngClass]="getStartTimeClassAsString()" 
             [ngSwitch]="event?.time"> Time: {{event.time}}
@@ -14,7 +14,7 @@ import { IEvent } from './shared/event.model'
             <span *ngSwitchCase="'10:00 am'">(Late Start)</span>
             <span *ngSwitchDefault>(Normal Start)</span>
         </div>
-        <div> Price: \${{event.price}}</div>
+        <div> Price: {{event.price | currency:'GBP'}}</div>
         <div [hidden]="!event?.location">  
             <span>Location: {{event?.location?.address}}</span>
             <!-- Not using the safe navigation operator ? will raise an error and all the following events will not be loaded properly-->
