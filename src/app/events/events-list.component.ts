@@ -1,7 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core'
 import { EventService } from './shared/event.service'
 // import { ToastrService } from '../common/toastr-with-wrapper.service'
-import {TOASTR_TOKEN, IToastr } from '../common/toastr.service'
+// import {TOASTR_TOKEN, IToastr } from '../common/toastr.service'
 import { ActivatedRoute } from '@angular/router'
 import { IEvent } from './shared/event.model'
 
@@ -14,6 +14,7 @@ import { IEvent } from './shared/event.model'
         <hr/>
         <div class="row">
             <div *ngFor="let thisEvent of events" class="col-md-5">
+                <!--event-thumbnail (click)="handleThumbnailClick(thisEvent.name)" -->
                 <event-thumbnail (click)="handleThumbnailClick(thisEvent.name)"
                     #templateVariable
                     (eventClick)="handleClickInChild($event)" 
@@ -43,7 +44,7 @@ implements OnInit {
     testInput:string = ''
     events:IEvent[]
 
-    constructor(private eventService:EventService,  /*private toastr:ToastrService,*/ @Inject(TOASTR_TOKEN) private toastr:IToastr, private route:ActivatedRoute) {
+    constructor(private eventService:EventService,  /*private toastr:ToastrService @Inject(TOASTR_TOKEN) private toastr:IToastr,,*/ private route:ActivatedRoute) {
     }
 
     handleClickInChild(data) {
@@ -59,8 +60,8 @@ implements OnInit {
 
         this.events = this.route.snapshot.data['events']
     }
-
+/*
     handleThumbnailClick(eventName){
       this.toastr.success(eventName, 'test title')
-    }
+    }*/
 }
