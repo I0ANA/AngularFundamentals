@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core'
+import { Component, OnInit, Inject } from '@angular/core'
 import { EventService } from './shared/event.service'
-import { ToastrService } from '../common/toastr-with-wrapper.service'
+// import { ToastrService } from '../common/toastr-with-wrapper.service'
+import {TOASTR_TOKEN, IToastr } from '../common/toastr.service'
 import { ActivatedRoute } from '@angular/router'
 import { IEvent } from './shared/event.model'
 
@@ -42,7 +43,7 @@ implements OnInit {
     testInput:string = ''
     events:IEvent[]
 
-    constructor(private eventService:EventService, private toastr:ToastrService, private route:ActivatedRoute) {
+    constructor(private eventService:EventService,  /*private toastr:ToastrService,*/ @Inject(TOASTR_TOKEN) private toastr:IToastr, private route:ActivatedRoute) {
     }
 
     handleClickInChild(data) {

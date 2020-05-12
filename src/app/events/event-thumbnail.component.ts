@@ -3,6 +3,8 @@ import { IEvent } from './shared/event.model'
 
 @Component({
     selector:'event-thumbnail',
+    //Note: [routerLink]="['/events', event.id]"  has priority over the (click) action binding int he events-list.component.ts that calls this component <event-thumbnail (click)="handleThumbnailClick(thisEvent.name)"
+    //that click won't be triggered
     template: `
     <div [routerLink]="['/events', event.id]" class="well hoverwell thumbnail">
         <h2>{{event.name}}</h2>
