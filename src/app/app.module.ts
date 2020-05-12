@@ -14,7 +14,8 @@ import { EventsListComponent,
   SessionListComponent,
   DurationPipe} from './events/index'
 import { NavBarComponent } from './nav/navbar.component'
-import { ToastrService } from './common/toastr.service'
+// import { ToastrService } from './common/toastr-with-wrapper.service'
+import { TOASTR_TOKEN, IToastr} from './common/toastr.service'
 import { CollapsibleWellComponent } from './common/collapsible-well.component'
 import { Error404Component } from './errors/404.component'
 import { appRoutes } from './routes'
@@ -22,6 +23,9 @@ import { AuthService } from './user/auth.service'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { CollapsibleWellWitSlots as CollapsibleWellWithSlots } from './common/collapsible-well-with-slots.component'
 import { CollapsibleWellWithThreeSlots } from './common/collapsible-well-three-slots.component'
+
+//this tells Typescript thet we know there is a global variable created by importing the /toast.min.js script, so no need to worry about it
+declare let toastr: IToastr
 
 @NgModule({
   imports: [
@@ -48,7 +52,8 @@ import { CollapsibleWellWithThreeSlots } from './common/collapsible-well-three-s
   //register service with angular so Angular will provide an instance of the object where the service is injected
   providers: [
     EventService, 
-    ToastrService,
+    // ToastrService,
+    { provide: TOASTR_TOKEN, useValue: toastr },
     EventRouteActivator, //EventRouteActivator this is the short hand form for declaring a provider
     //register afunction as a provider in a module, usign the long hand syntax for deplaring a provider
     //when <requested> use <service>
