@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core'
+import { Component, OnInit, Inject } from '@angular/core'
 import { FormControl, FormGroup, Validators } from '@angular/forms'
 import { AuthService } from './auth.service'
 import { Router } from '@angular/router'
+import { IToastr, TOASTR_TOKEN } from '../common/toastr.service'
 
 @Component({
   templateUrl:'./profile.component.html',
@@ -14,7 +15,11 @@ import { Router } from '@angular/router'
 })
 export class ProfileComponent implements OnInit {
 
-  constructor(private auth:AuthService, private router:Router){}
+  constructor(
+    private auth:AuthService, 
+    private router:Router,
+    @Inject(TOASTR_TOKEN) private toastr:IToastr
+  ){}
 
   profileForm: FormGroup
   //becasue these properties are private we needed to acces the field on the form using the syntax: profileForm.controls.<fieldname>.<property>
@@ -27,7 +32,7 @@ export class ProfileComponent implements OnInit {
     // console.log('this.auth.currentUser.firstName: ' + this.auth.currentUser.firstName)
     // console.log('this.auth.currentUser.lastName: ' + this.auth.currentUser.lastName)
 //this does not work properly - the erros does not dissapear when addin a valid firstname
-    this.firstName = new FormControl(this.auth.currentUser.firstName, [Validators.required, Validators.pattern("a-zA-Z.*")])
+    this.firstName = new FormControl(this.auth.currentUser.firstName, [Validators.required, Validators.pattern('[a-zA-Z].*')])
     this.lastName = new FormControl(this.auth.currentUser.lastName, Validators.required)
 
     this.profileForm = new FormGroup({
@@ -39,7 +44,13 @@ export class ProfileComponent implements OnInit {
   saveProfile(formValues) {
     if(this.profileForm.valid){
       this.auth.updateCurrentUser(formValues.firstName, formValues.lastName)
-      this.router.navigate(['/events'])
+      // this.router.navigate(['/events'])
+      this.toastr.success('Profile saved succesfully')
+    } else {
+      for (const name in this.profileForm.controls) {
+        if (this.profileForm.controls[name].invalid) {
+          console.log(name)        }
+      }
     }
   }
 

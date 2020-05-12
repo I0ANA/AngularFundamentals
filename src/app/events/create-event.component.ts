@@ -14,7 +14,10 @@ export class CreateEventComponent
 {
     // newEvent
     isDirty: boolean = true
-    constructor (private router: Router, private eventService:EventService){} 
+    constructor (
+        private router: Router, 
+        private eventService:EventService
+    ){} 
 
     ngOnInit(){
         // this.newEvent = {
