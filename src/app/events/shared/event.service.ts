@@ -1,6 +1,6 @@
-import { Injectable } from '@angular/core'
+import { Injectable, EventEmitter } from '@angular/core'
 import { Subject, Observable } from 'rxjs'
-import { IEvent } from './event.model';
+import { IEvent, ISession } from './event.model';
 
 @Injectable() //this Injectable is required just when the constructorof the service has another service injected, but it is good practice to include it
 export class EventService {
@@ -25,6 +25,26 @@ export class EventService {
     updateEvent(event){
       let index = EVENTS.findIndex( x => x.id = event.id)
       EVENTS[index] = event
+    }
+
+    searchSessions(searchTerm: string){
+      let term = searchTerm.toLocaleLowerCase()
+      let results: ISession[] = []
+
+      EVENTS.forEach( event => {
+        var matchingSessions = event.sessions.filter(s => s.name.toLocaleLowerCase().indexOf(term) > -1 ) //s.name.toLocaleLowerCase().indexOf(term) > -1 is equivalent to CONTAINS
+        matchingSessions = matchingSessions.map((session:any) => 
+            {
+              session.eventId = event.id; //add eventId to each session 
+              return session;
+            })
+        results = results.concat(matchingSessions)
+      })
+
+      let emitter = new EventEmitter(true) //is async = true
+      setTimeout(() => { emitter.emit(results) }, 100)
+    
+      return emitter
     }
 }
 
