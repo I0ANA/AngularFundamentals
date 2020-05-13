@@ -1,7 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser'
 import { NgModule } from '@angular/core'
 import { RouterModule } from '@angular/router'
-
 import { EventsAppComponent } from './events-app.component'
 import { EventsListComponent, 
   EventThumbnailComponent, 
@@ -14,18 +13,22 @@ import { EventsListComponent,
   SessionListComponent,
   DurationPipe} from './events/index'
 import { NavBarComponent } from './nav/navbar.component'
-// import { ToastrService } from './common/toastr-with-wrapper.service'
-import { TOASTR_TOKEN, IToastr} from './common/toastr.service'
-import { CollapsibleWellComponent } from './common/collapsible-well.component'
 import { Error404Component } from './errors/404.component'
 import { appRoutes } from './routes'
 import { AuthService } from './user/auth.service'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
-import { CollapsibleWellWitSlots as CollapsibleWellWithSlots } from './common/collapsible-well-with-slots.component'
-import { CollapsibleWellWithThreeSlots } from './common/collapsible-well-three-slots.component'
+// import { ToastrService } from './common/toastr-with-wrapper.service'
+import {  
+  JQUERY_TOKEN, 
+  TOASTR_TOKEN, IToastr, 
+  CollapsibleWellComponent, 
+  CollapsibleWellWitSlots as CollapsibleWellWithSlots, 
+  CollapsibleWellWithThreeSlots} from './common/index'
 
 //this tells Typescript thet we know there is a global variable created by importing the /toast.min.js script, so no need to worry about it
-declare let toastr: IToastr
+// declare let toastr: IToastr
+let toastr:IToastr = window['toastr']
+let jQuery = window['$']
 
 @NgModule({
   imports: [
@@ -54,6 +57,7 @@ declare let toastr: IToastr
     EventService, 
     // ToastrService,
     { provide: TOASTR_TOKEN, useValue: toastr },
+    { provide: JQUERY_TOKEN, useValue: jQuery},
     EventRouteActivator, //EventRouteActivator this is the short hand form for declaring a provider
     //register afunction as a provider in a module, usign the long hand syntax for deplaring a provider
     //when <requested> use <service>
