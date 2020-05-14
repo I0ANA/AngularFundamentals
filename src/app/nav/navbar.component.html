@@ -35,18 +35,30 @@
           <div class="form-group">
             <input [(ngModel)]="searchTerm" name="searchTerm" type="text" class="form-control" placeholder="Search Sessions" >
           </div>
-          <button class="btn btn-default" modal-trigger>
+          <button class="btn btn-default" modal-trigger="searchResults">
             Search
+          </button>
+          <button class="btn btn-default" modal-trigger="sayHello">
+            Say Hello in a modal
           </button>
         </form>
       </div>
     </div>
   </div>
 
-  <simple-modal title="Matching Sessions">
+  <simple-modal elementId="searchResults" title="Matching Sessions">
     <div class="list-group">
       <a class="list-group-item" *ngFor="let session of foundSessions"
         [routerLink]="['/events', session.eventId]">{{session.name}}  
       </a>
+    </div>
+  </simple-modal>
+
+  <simple-modal elementId="sayHello" title="Hello">
+    <div>
+      <h3>I am the second modal on the page</h3>
+      <p>Using content projection and bootstrap modal to achieve this </p>
+      <p>Dynamically passing the modal id to the SimpleModalComponent so to be able to pop-up multiple modals with the same code; using a directive modal-trigger to trigger the pop up on button click</p>
+      <p>Dynamically binding the simple-modal component with the button that triggers it through an input parameter which represents the modal id modal-trigger="sayHello" </p>
     </div>
   </simple-modal>
