@@ -1,6 +1,6 @@
 import { Component } from '@angular/core'
 import { EventService } from '../shared/event.service'
-import { ActivatedRoute } from '@angular/router' 
+import { ActivatedRoute, Params } from '@angular/router' 
 import { IEvent, ISession } from '../shared/index'
 
 @Component({
@@ -22,9 +22,14 @@ export class EventDetailsComponent {
     constructor(private eventService:EventService, private route:ActivatedRoute){ }
 
     ngOnInit() {
+        //we need to subscribe to the params of the router so when we navigate within the same component the page details gets updated,
+        // not just the url parameter
+        this.route.params.forEach((params:Params) => {
+            this.event = this.eventService.getEvent(+params['id'])
+        })
         // cast to a number using + 
         // snaphot.params gives us the params used to access this Component
-        this.event = this.eventService.getEvent( +this.route.snapshot.params['id'] )
+        // this.event = this.eventService.getEvent( +this.route.snapshot.params['id'] )
     }
 
     addSession(){
