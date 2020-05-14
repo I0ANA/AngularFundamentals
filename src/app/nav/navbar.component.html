@@ -46,7 +46,7 @@
     </div>
   </div>
 
-  <simple-modal elementId="searchResults" title="Matching Sessions">
+  <simple-modal closeOnBodyClick="true" elementId="searchResults" title="Matching Sessions">
     <div class="list-group">
       <a class="list-group-item" *ngFor="let session of foundSessions"
         [routerLink]="['/events', session.eventId]">{{session.name}}  
@@ -54,11 +54,16 @@
     </div>
   </simple-modal>
 
+  <!-- <simple-modal closeOnBodyClick="true"  elementId="sayHello" title="Hello"> -->
   <simple-modal elementId="sayHello" title="Hello">
     <div>
       <h3>I am the second modal on the page</h3>
       <p>Using content projection and bootstrap modal to achieve this </p>
       <p>Dynamically passing the modal id to the SimpleModalComponent so to be able to pop-up multiple modals with the same code; using a directive modal-trigger to trigger the pop up on button click</p>
       <p>Dynamically binding the simple-modal component with the button that triggers it through an input parameter which represents the modal id modal-trigger="sayHello" </p>
+      <!-- <button >Click me </button> not needed to make closeOnBodyClick="true" work
+      if input param is missing then the closeOnBodyClick will be undefined so not true 
+      and the closeOnBodyClick code won't be triggered  
+      -->
     </div>
   </simple-modal>
