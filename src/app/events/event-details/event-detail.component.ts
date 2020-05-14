@@ -26,6 +26,9 @@ export class EventDetailsComponent {
         // not just the url parameter
         this.route.params.forEach((params:Params) => {
             this.event = this.eventService.getEvent(+params['id'])
+            //we need to reset all the statuses of the page
+            this.addMode = false
+            //filter and sorting??
         })
         // cast to a number using + 
         // snaphot.params gives us the params used to access this Component
