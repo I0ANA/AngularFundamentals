@@ -23,7 +23,9 @@ import {
   TOASTR_TOKEN, IToastr, 
   CollapsibleWellComponent, 
   CollapsibleWellWitSlots as CollapsibleWellWithSlots, 
-  CollapsibleWellWithThreeSlots} from './common/index'
+  CollapsibleWellWithThreeSlots,
+  SimpleModalComponent, 
+  ModalTriggerDirective} from './common/index'
 
 //this tells Typescript thet we know there is a global variable created by importing the /toast.min.js script, so no need to worry about it
 // declare let toastr: IToastr
@@ -50,7 +52,9 @@ let jQuery = window['$']
     CollapsibleWellComponent,
     CollapsibleWellWithSlots,
     CollapsibleWellWithThreeSlots,
-    DurationPipe
+    DurationPipe,
+    SimpleModalComponent,
+    ModalTriggerDirective
   ],
   //register service with angular so Angular will provide an instance of the object where the service is injected
   providers: [

@@ -18,17 +18,14 @@ import { ISession, EventService } from '../events'
 })
 
 export class NavBarComponent {
-
     searchTerm: string = ''
     foundSessions: ISession[] 
 
     //declared to be accessed in the template
-    constructor(private auth:AuthService, private eventService:EventService){
-
-    }
+    constructor(private auth:AuthService, private eventService:EventService){ }
 
     searchSession(searchTerm) {
         this.eventService.searchSessions(searchTerm).subscribe( sessions => this.foundSessions = sessions)
-        console.log(this.foundSessions)
+        // console.log(this.foundSessions)
     }
 }
