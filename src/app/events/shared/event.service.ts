@@ -1,51 +1,70 @@
 import { Injectable, EventEmitter } from '@angular/core'
-import { Subject, Observable } from 'rxjs'
-import { IEvent, ISession } from './event.model';
+import { Subject, Observable, of } from 'rxjs'
+import { IEvent, ISession } from './event.model'
+import { HttpClient } from '@angular/common/http'
+import { catchError } from 'rxjs/operators'
 
 @Injectable() //this Injectable is required just when the constructorof the service has another service injected, but it is good practice to include it
 export class EventService {
-    getEvents():Observable<IEvent[]> {
-        let subject = new Subject<IEvent[]>()
-        //load async - 100ms the data to simulate a request
-        setTimeout( () => { subject.next(EVENTS); subject.complete(); }, 100 )
 
-        return subject
+  constructor(private http:HttpClient ) {  }
+
+  getEvents():Observable<IEvent[]> {
+      // let subject = new Subject<IEvent[]>()
+      // //load async - 100ms the data to simulate a request
+      // setTimeout( () => { subject.next(EVENTS); subject.complete(); }, 100 )
+
+      // return subject
+
+      //grab the events from the server
+      return this.http.get<IEvent[]>('/api/events')
+        .pipe(
+          catchError(this.handleError<IEvent[]>('getEvents', [] ))
+          )
+  }
+
+  getEvent(id:number):IEvent {
+      return EVENTS.find(event => event.id === id)
+  }
+
+  saveEvent(event:IEvent){
+    event.id = 999
+    event.sessions = []
+    EVENTS.push(event)
+  }
+  
+  updateEvent(event){
+    let index = EVENTS.findIndex( x => x.id = event.id)
+    EVENTS[index] = event
+  }
+
+  searchSessions(searchTerm: string){
+    let term = searchTerm.toLocaleLowerCase()
+    let results: ISession[] = []
+
+    EVENTS.forEach( event => {
+      var matchingSessions = event.sessions.filter(s => s.name.toLocaleLowerCase().indexOf(term) > -1 ) //s.name.toLocaleLowerCase().indexOf(term) > -1 is equivalent to CONTAINS
+      matchingSessions = matchingSessions.map((session:any) => 
+          {
+            session.eventId = event.id; //add eventId to each session 
+            return session;
+          })
+      results = results.concat(matchingSessions)
+    })
+
+    let emitter = new EventEmitter(true) //is async = true
+    setTimeout(() => { emitter.emit(results) }, 100)
+  
+    return emitter
+  }
+
+  //template to handle basic errors
+  private handleError<T> (operation= 'operation', result?: T){
+    return (error:any) : Observable<T> => {
+      console.log(error)
+      return of(result as T)
     }
-
-    getEvent(id:number):IEvent {
-        return EVENTS.find(event => event.id === id)
-    }
-
-    saveEvent(event:IEvent){
-      event.id = 999
-      event.sessions = []
-      EVENTS.push(event)
-    }
-    
-    updateEvent(event){
-      let index = EVENTS.findIndex( x => x.id = event.id)
-      EVENTS[index] = event
-    }
-
-    searchSessions(searchTerm: string){
-      let term = searchTerm.toLocaleLowerCase()
-      let results: ISession[] = []
-
-      EVENTS.forEach( event => {
-        var matchingSessions = event.sessions.filter(s => s.name.toLocaleLowerCase().indexOf(term) > -1 ) //s.name.toLocaleLowerCase().indexOf(term) > -1 is equivalent to CONTAINS
-        matchingSessions = matchingSessions.map((session:any) => 
-            {
-              session.eventId = event.id; //add eventId to each session 
-              return session;
-            })
-        results = results.concat(matchingSessions)
-      })
-
-      let emitter = new EventEmitter(true) //is async = true
-      setTimeout(() => { emitter.emit(results) }, 100)
-    
-      return emitter
-    }
+  }
 }
 
 const EVENTS:IEvent[] = [

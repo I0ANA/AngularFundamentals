@@ -30,6 +30,8 @@ import {
   SimpleModalComponent, 
   ModalTriggerDirective} from './common/index'
 
+import { HttpClientModule } from '@angular/common/http'
+
 //this tells Typescript thet we know there is a global variable created by importing the /toast.min.js script, so no need to worry about it
 // declare let toastr: IToastr
 let toastr:IToastr = window['toastr']
@@ -40,7 +42,8 @@ let jQuery = window['$']
     BrowserModule,
     RouterModule.forRoot(appRoutes),
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule
   ],
   declarations: [
     EventsAppComponent,
