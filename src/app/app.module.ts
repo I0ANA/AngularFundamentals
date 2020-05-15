@@ -13,7 +13,8 @@ import { EventsListComponent,
   SessionListComponent,
   DurationPipe,
   UpvoteComponent,
-  VoterService} from './events/index'
+  VoterService,
+  LocationValidator} from './events/index'
 import { NavBarComponent } from './nav/navbar.component'
 import { Error404Component } from './errors/404.component'
 import { appRoutes } from './routes'
@@ -57,7 +58,8 @@ let jQuery = window['$']
     DurationPipe,
     SimpleModalComponent,
     ModalTriggerDirective,
-    UpvoteComponent
+    UpvoteComponent,
+    LocationValidator
   ],
   //register service with angular so Angular will provide an instance of the object where the service is injected
   providers: [

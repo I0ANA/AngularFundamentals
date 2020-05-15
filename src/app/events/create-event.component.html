@@ -22,10 +22,11 @@
       <em *ngIf="newEventForm.controls.price?.invalid && (newEventForm.controls.price?.touched)">Required</em>
       <input (ngModel)="price" name="price" required id="eventPrice" type="text" type="number" class="form-control" placeholder="event price..." />
     </div>
-    
-    <div ngModelGroup="location">
+    <!-- ng will take the ngModelGroup and add it to the locationGroup template reference variable so we can access it for the -->
+    <div ngModelGroup="location" location-validator #locationGroup="ngModelGroup">
       <div class="form-group">
         <label for="address">Event Location:</label>
+        <em *ngIf="!locationGroup?.valid && locationGroup.touched">Required either the event location or the onlineUrl</em>
         <input (ngModel)="location.address" name="address" id="address" type="text" class="form-control" placeholder="Address of event..." />
       </div>
       <div class="row">
@@ -36,21 +37,23 @@
           <input (ngModel)="location.country" name="country" id="country" type="text" class="form-control" placeholder="Country..." />
         </div>
       </div>
-  </div>
+    </div>
 
     <div class="form-group">
       <label for="onlineUrl">Online Url:</label>
-      <input (ngModel)="onlineUrl" name="onlineUrl" id="onlineUrl" type="text" class="form-control" placeholder="Online Url..." />
+      <!-- updateValueAndValidity triggers the validation of the address field to be evaluated and therefore the entire custom validator, without his the validation won't be triggered when onlineUrl changes-->
+      <!--locationGroup is the refrence to the ngModelGroup div, we need to access the control.controls becasue we want the fields not the modelgroup itself-->
+      <input (ngModel)="onlineUrl" name="onlineUrl" (change)="locationGroup.control.controls.address.updateValueAndValidity()" id="onlineUrl" type="text" class="form-control" placeholder="Online Url..." />
     </div>
     <div class="form-group" [ngClass]="{'error': newEventForm.controls.imageUrl?.invalid && newEventForm.controls.imageUrl?.touched}">
       <label for="imageUrl">Image:</label>
       <em *ngIf="newEventForm.controls.imageUrl?.invalid && newEventForm.controls.imageUrl?.touched && newEventForm.controls.imageUrl?.errors.required">Required</em>
       <em *ngIf="newEventForm.controls.imageUrl?.invalid && newEventForm.controls.imageUrl?.touched  && newEventForm.controls.imageUrl?.errors.pattern">Must be a png or jpg url</em>
-      <input (ngModel)="imageUrl" name="imageUrl" required pattern=".*\/.*.(png|jpg)" id="imageUrl" type="text" class="form-control" placeholder="url of image..." />
-      <img [src]="newEventForm.controls.imageUrl.value" *ngIf="newEventForm.controls.imageUrl?.valid"/>
+      <input (ngModel)="imageUrl" name="imageUrl" pattern=".*\/.*.(png|jpg)" id="imageUrl" type="text" class="form-control" placeholder="url of image..." />
+      <img *ngIf="newEventForm.controls.imageUrl?.valid && newEventForm.controls.imageUrl?.value" [src]="newEventForm.controls.imageUrl?.value" />
     </div>
     
-    <button type="submit" class="btn btn-primary">Save</button>
-    <button type="button" [disabled]="newEventForm.invalid" class="btn btn-default" (click)="cancel()">Cancel</button>
+    <button type="submit" [disabled]="newEventForm.invalid" class="btn btn-primary">Save</button>
+    <button type="button" class="btn btn-default" (click)="cancel()">Cancel</button>
   </form>
 </div>
