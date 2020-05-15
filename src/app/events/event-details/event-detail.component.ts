@@ -25,9 +25,14 @@ export class EventDetailsComponent {
         //we need to subscribe to the params of the router so when we navigate within the same component the page details gets updated,
         // not just the url parameter
         this.route.params.forEach((params:Params) => {
-            this.event = this.eventService.getEvent(+params['id'])
+            this.eventService.getEvent(+params['id']).subscribe(
+                (event:IEvent) => {
+                    this.event = event
+                    //move line here so to change the addMode only if the call is succesfull
+                    this.addMode = false
+                })
             //we need to reset all the statuses of the page
-            this.addMode = false
+            // this.addMode = false
             //filter and sorting??
         })
         // cast to a number using + 
