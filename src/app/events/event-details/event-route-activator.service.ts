@@ -3,20 +3,22 @@ import { Injectable }  from '@angular/core'
 import { EventService } from '../shared/event.service'
 
 @Injectable()
-export class EventRouteActivator implements CanActivate {
+export class EventRouteActivator 
+//implements CanActivate
+ {
 
-    constructor(private eventService:EventService, private router:Router){
-    }
+    // constructor(private eventService:EventService, private router:Router){
+    // }
 
-    canActivate(route: ActivatedRouteSnapshot) {
+    // canActivate(route: ActivatedRouteSnapshot) {
 
-        //cast to boolean using !!
-        const eventExists = !!this.eventService.getEvent(+route.params['id'])
+    //     //cast to boolean using !!
+    //     const eventExists = !!this.eventService.getEvent(+route.params['id'])
 
-        if(!eventExists)
-            this.router.navigate(['/404'])
+    //     if(!eventExists)
+    //         this.router.navigate(['/404'])
 
-        //we need to return the guard result, if not exist then redirect, otherwise return true
-        return eventExists
-    }
+    //     //we need to return the guard result, if not exist then redirect, otherwise return true
+    //     return eventExists
+    // }
 }
