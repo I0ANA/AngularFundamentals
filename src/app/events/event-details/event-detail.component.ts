@@ -41,9 +41,10 @@ export class EventDetailsComponent {
 
         //get data from resolver which adds the preloaded data to the route
 
-        this.route.params.forEach((params:Params) => {
-            this.event = this.route.snapshot.data['event']
+        this.route.data.forEach( data => {
+            this.event = data['event']
             //the 'event' name is set int he routes in the resolve: { event: EventResolver} }
+            this.addMode = false
         })
     }
 
