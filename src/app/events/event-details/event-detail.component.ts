@@ -24,20 +24,27 @@ export class EventDetailsComponent {
     ngOnInit() {
         //we need to subscribe to the params of the router so when we navigate within the same component the page details gets updated,
         // not just the url parameter
-        this.route.params.forEach((params:Params) => {
-            this.eventService.getEvent(+params['id']).subscribe(
-                (event:IEvent) => {
-                    this.event = event
-                    //move line here so to change the addMode only if the call is succesfull
-                    this.addMode = false
-                })
-            //we need to reset all the statuses of the page
-            // this.addMode = false
-            //filter and sorting??
-        })
+        // this.route.params.forEach((params:Params) => {
+        //     this.eventService.getEvent(+params['id']).subscribe(
+        //         (event:IEvent) => {
+        //             this.event = event
+        //             //move line here so to change the addMode only if the call is succesfull
+        //             this.addMode = false
+        //         })
+        //     //we need to reset all the statuses of the page
+        //     // this.addMode = false
+        //     //filter and sorting??
+        // })
         // cast to a number using + 
         // snaphot.params gives us the params used to access this Component
         // this.event = this.eventService.getEvent( +this.route.snapshot.params['id'] )
+
+        //get data from resolver which adds the preloaded data to the route
+
+        this.route.params.forEach((params:Params) => {
+            this.event = this.route.snapshot.data['event']
+            //the 'event' name is set int he routes in the resolve: { event: EventResolver} }
+        })
     }
 
     addSession(){

@@ -1,11 +1,11 @@
 import { CanActivate, ActivatedRouteSnapshot, Router } from '@angular/router'
 import { Injectable }  from '@angular/core'
 import { EventService } from '../shared/event.service'
-
+//this should be deleted, no longer used  
 @Injectable()
 export class EventRouteActivator 
 //implements CanActivate
- {
+ { 
 
     // constructor(private eventService:EventService, private router:Router){
     // }

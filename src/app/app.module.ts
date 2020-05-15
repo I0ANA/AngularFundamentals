@@ -14,7 +14,8 @@ import { EventsListComponent,
   DurationPipe,
   UpvoteComponent,
   VoterService,
-  LocationValidator} from './events/index'
+  LocationValidator,
+  EventResolver} from './events/index'
 import { NavBarComponent } from './nav/navbar.component'
 import { Error404Component } from './errors/404.component'
 import { appRoutes } from './routes'
@@ -70,9 +71,10 @@ let jQuery = window['$']
     // ToastrService,
     { provide: TOASTR_TOKEN, useValue: toastr },
     { provide: JQUERY_TOKEN, useValue: jQuery},
-    EventRouteActivator, //EventRouteActivator this is the short hand form for declaring a provider
+    //EventRouteActivator, //EventRouteActivator this is the short hand form for declaring a provider
     //register afunction as a provider in a module, usign the long hand syntax for deplaring a provider
     //when <requested> use <service>
+    EventResolver,
     {
       provide: 'canDeactivateCreateEvent',
       useValue: checkDirtyState
