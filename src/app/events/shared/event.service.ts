@@ -1,7 +1,7 @@
 import { Injectable, EventEmitter } from '@angular/core'
 import { Subject, Observable, of } from 'rxjs'
 import { IEvent, ISession } from './event.model'
-import { HttpClient } from '@angular/common/http'
+import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { catchError } from 'rxjs/operators'
 
 @Injectable() //this Injectable is required just when the constructorof the service has another service injected, but it is good practice to include it
@@ -30,9 +30,14 @@ export class EventService {
   }
 
   saveEvent(event:IEvent){
-    event.id = 999
-    event.sessions = []
-    EVENTS.push(event)
+    // event.id = 999
+    // event.sessions = []
+    // EVENTS.push(event)
+
+    let options = { headers: new HttpHeaders( {'Content-Type': 'application/json'} ) }
+    //getting back the event becasue the save sets the id, not always we need to get back the object
+    return this.http.post<IEvent>('/api/events', event, options)
+      .pipe(catchError(this.handleError<IEvent>('getEvent')))
   }
   
   updateEvent(event){

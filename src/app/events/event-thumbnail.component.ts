@@ -7,7 +7,7 @@ import { IEvent } from './shared/event.model'
     //that click won't be triggered
     template: `
     <div [routerLink]="['/events', event.id]" class="well hoverwell thumbnail">
-        <h2>{{event.name}}</h2>
+        <h2>{{event.name | uppercase}}</h2>
         <div> Date: {{event.date | date }}</div>
         <div 
             [ngClass]="getStartTimeClassAsString()" 
