@@ -40,24 +40,27 @@ export class EventService {
       .pipe(catchError(this.handleError<IEvent>('getEvent')))
   }
   
-  searchSessions(searchTerm: string){
-    let term = searchTerm.toLocaleLowerCase()
-    let results: ISession[] = []
+  searchSessions(searchTerm: string): Observable<ISession[]>{
+    // let term = searchTerm.toLocaleLowerCase()
+    // let results: ISession[] = []
 
-    EVENTS.forEach( event => {
-      var matchingSessions = event.sessions.filter(s => s.name.toLocaleLowerCase().indexOf(term) > -1 ) //s.name.toLocaleLowerCase().indexOf(term) > -1 is equivalent to CONTAINS
-      matchingSessions = matchingSessions.map((session:any) => 
-          {
-            session.eventId = event.id; //add eventId to each session 
-            return session;
-          })
-      results = results.concat(matchingSessions)
-    })
+    // EVENTS.forEach( event => {
+    //   var matchingSessions = event.sessions.filter(s => s.name.toLocaleLowerCase().indexOf(term) > -1 ) //s.name.toLocaleLowerCase().indexOf(term) > -1 is equivalent to CONTAINS
+    //   matchingSessions = matchingSessions.map((session:any) => 
+    //       {
+    //         session.eventId = event.id; //add eventId to each session 
+    //         return session;
+    //       })
+    //   results = results.concat(matchingSessions)
+    // })
 
-    let emitter = new EventEmitter(true) //is async = true
-    setTimeout(() => { emitter.emit(results) }, 100)
+    // let emitter = new EventEmitter(true) //is async = true
+    // setTimeout(() => { emitter.emit(results) }, 100)
   
-    return emitter
+    // return emitter
+
+    return this.http.get<ISession[]>('/api/sessions/search?search=' + searchTerm)
+      .pipe(catchError(this.handleError<ISession[]>('searchSessions')))
   }
 
   //template to handle basic errors
