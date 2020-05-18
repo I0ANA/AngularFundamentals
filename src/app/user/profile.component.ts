@@ -58,6 +58,12 @@ export class ProfileComponent implements OnInit {
     this.router.navigate(['/events'])
   }
 
+  logout(){
+    this.auth.logout().subscribe(() => {
+      this.router.navigate(['/user/login'])
+    })
+  }
+
   validateLastName() {
     // return this.profileForm.controls.lasttName?.invalid && this.profileForm.controls.lasttName?.touched ;#
     //it is more direct to just get the value from the this.<control> than from the form 

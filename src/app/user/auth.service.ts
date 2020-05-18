@@ -31,6 +31,15 @@ export class AuthService {
             .pipe(catchError( err => { return of(false) } ))
     }
 
+    logout(){
+        //log out user on the client
+        this.currentUser = undefined
+
+        //log out user on the server 
+        let options = { headers: new HttpHeaders({'Content-Type': 'application/json'})}
+        return this.http.post('/api/logout', {}, options)
+    }
+
     isAuthenticated() {
         return !!this.currentUser
     }
