@@ -44,8 +44,8 @@ export class ProfileComponent implements OnInit {
   saveProfile(formValues) {
     if(this.profileForm.valid){
       this.auth.updateCurrentUser(formValues.firstName, formValues.lastName)
-      // this.router.navigate(['/events'])
-      this.toastr.success('Profile saved succesfully')
+      //pop up the toaster message only if the updated on the server was succesful 
+      .subscribe(() => this.toastr.success('Profile saved succesfully') )
     } else {
       for (const name in this.profileForm.controls) {
         if (this.profileForm.controls[name].invalid) {
@@ -67,5 +67,4 @@ export class ProfileComponent implements OnInit {
   validateFirstName() {
     return this.firstName.valid || this.firstName.untouched 
   }
-
 }
