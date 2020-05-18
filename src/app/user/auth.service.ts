@@ -35,6 +35,22 @@ export class AuthService {
         return !!this.currentUser
     }
 
+    checkAuthenticationStatus(){
+        this.http.get('api/currentIdentity')
+        //using tap allows an easy change to allow subscription in another method
+        .pipe( tap( data => {
+            if(data instanceof Object)
+                this.currentUser = <IUser>data               
+        }))
+        .subscribe()
+        //or do it directly in the subscribe method
+        // .subscribe( data => {
+        //     if(data instanceof Object)
+        //         this.currentUser = <IUser>data
+
+        // })
+    }
+
     updateCurrentUser(firstName:string, lastName:string){
         this.currentUser.firstName = firstName
         this.currentUser.lastName = lastName
